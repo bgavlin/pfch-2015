@@ -12,6 +12,7 @@ soup = BeautifulSoup(html, "html.parser")
 all_titles = soup.find_all("h3", attrs={"class":"title titleSuspense"})
 all_divs = soup.find_all("div", attrs={"class":"review"})
 container = soup.find("div", attrs={"class":"container"})
+#using regex to pull out wanted reviews
 high_ratings = soup.find_all(string=re.compile("\[[^1-7]\/10\]"))
 
 #prints titles + reviews of any shows rated 8/10 or higher
