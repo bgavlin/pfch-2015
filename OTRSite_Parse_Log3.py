@@ -6,34 +6,53 @@ with open("OTRSiteScrape.txt","r") as data:
 #    for row in data.readlines():
     text=data.read()
     
-    series_title = re.compile('Series\:\s\"(.+?)\"', re.IGNORECASE)
-    all_titles = series_title.findall(text)
-    announcer_name = re.compile(r'Announcer\:\s(.+?\s.+?)[\s\\]',re.IGNORECASE)
-    all_announcers = announcer_name.findall(text)
-    show_stars = re.compile(r'stars:\s(.+?\s.+?)\\',re.IGNORECASE)
-    all_stars = show_stars.findall(text)
+#    series_title = re.compile('Series\:\s\"(.+?)\"', re.IGNORECASE)
+#    all_titles = series_title.finditer(text)
+#    announcer_name = re.compile(r'Announcer\:\s(.+?\s.+?)[\s\\]',re.IGNORECASE)
+#    all_announcers = announcer_name.findall(text)
+#    show_stars = re.compile(r'stars:\s(.+?\s.+?)\\',re.IGNORECASE)
+#    all_stars = show_stars.findall(text)
+    
+    search_string = re.compile(r'Series\:\s\"(.+?)\".*?Announcer\:\s(.+?\s.+?)[\s\\].*?stars:\s(.+?\s.+?)\\', re.IGNORECASE)
+
+
     
     with open('Shows_Parsed.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        
-        for a_title in all_titles:    
+             
+        for match in search_string.finditer(text):    
+            try:
+                title=match.group(1)
+            except:
+                title= False       
             try: 
-                writer.writerow([a_title])
+                announcer=match.group(2)
             except:
-                writer.writerow("false")        
-        for an_announcer in all_announcers:
+                announcer=False
             try:
-#                    announcer = an_announcer
-                writer.writerow([an_announcer])
+                stars=match.group(3)
             except:
-                writer.writerow("false")
-                        
-        for a_star in all_stars:
-#                    star=a_star
-            try:
-                writer.writerow([a_star])            
-            except:
-                writer.writerow("false")
+                stars=False
             
+        writer.writerow([title,announcer,stars])
+                
+
+#         for match in series_title.finditer(text):    
+#            try:
+#                title=match.group(1)
+#            except:
+#                title= "False"
+#        
+#        for match in announcer_name.finditer(text):    
+#            try:
+#                announcer=match.group(1)
+#            except:
+#                announcer= "False"
+#                
+#        for match in show_stars.finditer(text):    
+#            try:
+#                stars=match.group(1)
+#            except:
+#                stars= "False"              
                 
             
