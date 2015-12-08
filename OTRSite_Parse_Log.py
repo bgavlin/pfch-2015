@@ -7,7 +7,7 @@ with open("OTRSiteScrape.txt","r") as data:
         
     for row in data.readlines():
         series_title = re.compile('Series\:\s\"(.+?)\"', re.IGNORECASE)
-        all_titles = series_title.findall(row)
+        all_titles = series_title.search(row)
         print(all_titles)
         announcer_name = re.compile(r'Announcer\:\s(.+?\s.+?)[\s\\]',re.IGNORECASE)
         all_announcers = announcer_name.findall(row)
@@ -59,6 +59,6 @@ with open("OTRSiteScrape.txt","r") as data:
 ##            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 #            writer = csv.writer(csvfile, delimiter=' ')
 #            
-            writer.writerows([title,announcer,stars]) 
+#            writer.writerows([title,announcer,stars]) 
 
 

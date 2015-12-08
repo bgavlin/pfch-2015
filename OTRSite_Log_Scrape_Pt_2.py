@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 
 import requests
-
 import csv
 
 with open("Log_Links_4.csv","r") as links:
