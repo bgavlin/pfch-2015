@@ -10,7 +10,6 @@ html = object_page.text
 soup = BeautifulSoup(html, "html.parser")
 
 all_links = soup.find_all("a")
-#select_links = soup.find_all(
 
 with open('Log_Links_2.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=",")
